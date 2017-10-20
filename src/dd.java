@@ -8,7 +8,7 @@ import javax.imageio.*;
 import javax.swing.*;
 
 
-
+//----------------------------> GraphicObject 설정  x,y width,height <--------------------------------
 class GraphicObject{
    BufferedImage img = null;
    int x = 0, y = 0;
@@ -37,7 +37,7 @@ class GraphicObject{
    
    public void keyPressed(KeyEvent event){}
 }
-
+//--------------------------------> Missile설정 GraphicObjecd를 확장 <----------------------------------------------------
 class Missile extends GraphicObject {
    boolean launched = false;
    public Missile(String name){
@@ -64,7 +64,7 @@ class Missile extends GraphicObject {
       }
    }
 }
-
+//----------------------------------->적 설정 GraphicObject<--------------------------------------------
 class Enermy extends GraphicObject { // 적 캐릭터
    int dx = -10;
    int dy = 2;
@@ -89,7 +89,7 @@ class Enermy extends GraphicObject { // 적 캐릭터
       return y;
    }
 }
-
+//----------------------------->공격자 배 설정<-----------------------------------------
 class SpaceShip extends GraphicObject {
    public SpaceShip(String name){
       super(name);
@@ -104,12 +104,14 @@ class SpaceShip extends GraphicObject {
       if (event.getKeyCode() == KeyEvent.VK_DOWN){ y += 10; }
    }
 }
-
+//**********************************************************************************
+//------------------------------------------------------------------------------------
 class MyPanel extends JPanel implements KeyListener {
    Enermy enermy;
    SpaceShip spaceship;
    Missile missile;
    boolean drawok;
+   //------------------>MyPanel<----------------------------------------------
    public MyPanel() {
       super();
       this.addKeyListener(this);
@@ -144,6 +146,7 @@ class MyPanel extends JPanel implements KeyListener {
       Thread t = new MyThread();
       t.start();
    }
+   //----------------------------->paint<--------------------------------
    @Override
    public void paint(Graphics g){
       super.paint(g);
@@ -153,7 +156,7 @@ class MyPanel extends JPanel implements KeyListener {
       spaceship.draw(g);
       missile.draw(g);
    }
-   
+   //---------------keyPress------------------------------------
    public void keyPressed(KeyEvent event){
       spaceship.keyPressed(event);
       missile.keyPressed(event, spaceship.x, spaceship.y);
